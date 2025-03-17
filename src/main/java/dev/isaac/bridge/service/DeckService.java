@@ -19,8 +19,11 @@ public class DeckService {
      * @return a populated deck
      */
     public void populate(Deck deck) {
-        if (!deck.isEmpty()) {
-            throw new IllegalStateException("Cannot populate a non empty deck.");
+        if (deck == null) {
+            deck = new Deck();
+        } 
+        if (deck.getCards().size() != 0) { 
+            throw new IllegalStateException("Cannot fill a non empty deck.");
         }
 
         for (Card.Suit suit : Card.Suit.values()) {
@@ -42,7 +45,7 @@ public class DeckService {
     public ArrayList<Hand> dealHands(Deck deck) {
         ArrayList<Hand> hands = new ArrayList<>();
 
-        if (deck.isEmpty()) {
+        if (deck == null || deck.isEmpty()) {
             populate(deck);
         } 
 

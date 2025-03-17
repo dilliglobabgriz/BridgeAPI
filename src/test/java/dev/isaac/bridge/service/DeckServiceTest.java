@@ -1,5 +1,6 @@
 package dev.isaac.bridge.service;
 
+import dev.isaac.bridge.BridgeApplication;
 import dev.isaac.bridge.entity.Deck;
 import dev.isaac.bridge.entity.Hand;
 
@@ -12,7 +13,7 @@ import org.junit.jupiter.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+@SpringBootTest(classes = BridgeApplication.class)
 public class DeckServiceTest {
 
     @Autowired

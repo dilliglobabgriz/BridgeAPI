@@ -14,6 +14,10 @@ public class Hand {
     @JoinColumn(name = "hand_id")
     private ArrayList<Card> cards = new ArrayList<>();
 
+    // Bidirectional one to one with player
+    @OneToOne(mappedBy = "hand")
+    private Player player;
+
     public Hand() {
     }
 
@@ -31,6 +35,14 @@ public class Hand {
 
     public void setCards(ArrayList<Card> cards) {
         this.cards = cards;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+    
+    public Player getPlayer() {
+        return this.player;
     }
 
     public int size() {

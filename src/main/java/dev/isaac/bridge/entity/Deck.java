@@ -1,7 +1,6 @@
 package dev.isaac.bridge.entity;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.ArrayList;
 
 @Entity
@@ -53,6 +52,12 @@ public class Deck {
 
     public boolean isEmpty() {
         return cards.isEmpty();
+    }
+
+    public void clear() {
+        while (!this.isEmpty()) {
+            this.removeTopCard();
+        }
     }
 
     public String toString() {
