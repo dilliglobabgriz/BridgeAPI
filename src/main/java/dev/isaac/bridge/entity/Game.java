@@ -13,7 +13,7 @@ public class Game {
     @JoinColumn(name = "game_id")
     private ArrayList<Player> players = new ArrayList<>();
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "game_id")
     private Deck deck;
 

@@ -20,11 +20,10 @@ public class DeckService {
      */
     public void populate(Deck deck) {
         if (deck == null) {
-            deck = new Deck();
+            throw new IllegalArgumentException("Deck must not be null.");
         } 
-        if (deck.getCards().size() != 0) { 
-            throw new IllegalStateException("Cannot fill a non empty deck.");
-        }
+        
+        deck.clear();
 
         for (Card.Suit suit : Card.Suit.values()) {
             for (Card.Rank rank : Card.Rank.values()) {
@@ -43,15 +42,19 @@ public class DeckService {
      * @return 4 hands of 13 cards each
      */
     public ArrayList<Hand> dealHands(Deck deck) {
-        ArrayList<Hand> hands = new ArrayList<>();
-
-        if (deck == null || deck.isEmpty()) {
-            populate(deck);
-        } 
-
-        if (!(deck.size() == 52)) {
-            throw new IllegalStateException("Can only deal with a 52 card deck.");
+        if (deck == null) {
+            throw new IllegalArgumentException("Deck must not be null.");
         }
+
+        if (deck.isEmpty()) {
+            populate(deck);
+        }
+
+        if (deck.size() != 52) {
+            throw new IllegalStateException("Can only deal from a full 52-card deck.");
+        }
+
+        ArrayList<Hand> hands = new ArrayList<>();
 
         for (int i=0; i<4; i++) {
             Hand hand = new Hand();

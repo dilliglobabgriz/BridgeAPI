@@ -1,8 +1,6 @@
 package dev.isaac.bridge.entity;
 
 import javax.persistence.*;
-import java.util.List;
-import java.util.ArrayList;
 
 @Entity
 public class Card {
