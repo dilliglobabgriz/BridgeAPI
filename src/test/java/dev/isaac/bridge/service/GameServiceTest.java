@@ -19,15 +19,13 @@ public class GameServiceTest {
 
     private Game game;
 
-    private Deck deck;
+    //private Deck deck;
 
     @BeforeEach
     void setUp() {
-        deck = new Deck();
-
         game = new Game();
-        game.setDeck(deck);
-        game.setState(Game.GameState.WAITING_FOR_PLAYERS);
+
+        gameService.initializeGame(game);
         
     }
 

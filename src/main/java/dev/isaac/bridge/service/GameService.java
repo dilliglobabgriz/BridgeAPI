@@ -3,6 +3,8 @@ package dev.isaac.bridge.service;
 import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
+
+import dev.isaac.bridge.entity.Deck;
 import dev.isaac.bridge.entity.Game;
 import dev.isaac.bridge.entity.Hand;
 import dev.isaac.bridge.entity.Player;
@@ -65,6 +67,19 @@ public class GameService {
         for (int i=0; i<game.getPlayers().size(); i++) { 
             players.get(i).setHand(hands.get(i));
         }
+    }
+
+    /**
+     * Set up the game
+     * Game state should be waiting, deck should be initialized but empty
+     * 
+     * @param game
+     */
+    public void initializeGame(Game game) { 
+        Deck deck = new Deck();
+
+        game.setDeck(deck);
+        game.setState(Game.GameState.WAITING_FOR_PLAYERS);
     }
 
     
