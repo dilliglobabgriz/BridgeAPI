@@ -4,6 +4,8 @@ import org.springframework.stereotype.Service;
 
 import dev.isaac.bridge.entity.Deck;
 import dev.isaac.bridge.entity.Hand;
+import dev.isaac.bridge.entity.Rank;
+import dev.isaac.bridge.entity.Suit;
 import dev.isaac.bridge.entity.Card;
 
 import java.util.ArrayList;
@@ -25,8 +27,8 @@ public class DeckService {
         
         deck.clear();
 
-        for (Card.Suit suit : Card.Suit.values()) {
-            for (Card.Rank rank : Card.Rank.values()) {
+        for (Suit suit : Suit.values()) {
+            for (Rank rank : Rank.values()) {
                 Card curCard = new Card(rank, suit);
                 deck.addCard(curCard);
             }

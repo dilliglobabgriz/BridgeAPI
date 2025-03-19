@@ -17,7 +17,7 @@ public class DeckClassTest {
 
     @Test
     public void addCard() {
-        Card card = new Card(Card.Rank.ACE, Card.Suit.SPADES);
+        Card card = new Card(Rank.ACE, Suit.SPADES);
 
         deck.addCard(card);
         String expected = "ACE of SPADES";

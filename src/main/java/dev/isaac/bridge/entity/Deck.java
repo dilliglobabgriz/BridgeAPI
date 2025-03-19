@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 
 @Entity
-public class Deck {
+public class Deck extends CardHolder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,46 +18,6 @@ public class Deck {
 
     public Long getId() {
         return id;
-    }
-
-    public void addCard(Card card) {
-        cards.add(card);
-    }
-
-    public ArrayList<Card> getCards() {
-        return cards;
-    }
-
-    public void setCards(ArrayList<Card> cards) {
-        this.cards = cards;
-    }
-
-    public Card removeTopCard() {
-        if (cards.isEmpty()) {
-            throw new IllegalStateException("Deck is empty");
-        }
-        return cards.remove(0);
-    }
-
-    public Card peekTopCard() {
-        if (cards.isEmpty()) {
-            throw new IllegalStateException("Deck is empty");
-        }
-        return cards.get(0);
-    }
-
-    public int size() {
-        return cards.size();
-    }
-
-    public boolean isEmpty() {
-        return cards.isEmpty();
-    }
-
-    public void clear() {
-        while (!this.isEmpty()) {
-            this.removeTopCard();
-        }
     }
 
     public String toString() {

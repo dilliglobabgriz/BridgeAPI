@@ -9,14 +9,7 @@ public class Card {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    public enum Suit {
-        CLUBS, DIAMONDS, HEARTS, SPADES
-    }
-
-    public enum Rank {
-        TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING, ACE
-    }
-
+    
     @Enumerated(EnumType.STRING)
     private Suit suit;
 
@@ -54,5 +47,10 @@ public class Card {
     @Override
     public String toString() {
         return rank + " of " + suit;
+    }
+
+    public String toStringABV() { 
+        String s = "";
+        return s + rank.getAbbreviation() + suit.getSymbol();
     }
 }
