@@ -1,0 +1,62 @@
+package dev.isaac.bridge.entity.model;
+
+import javax.persistence.*;
+
+import dev.isaac.bridge.entity.enums.BidLevel;
+import dev.isaac.bridge.entity.enums.BidType;
+
+@Entity
+public class Bid {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @Enumerated(EnumType.STRING)
+    private BidLevel level;
+
+    @Enumerated(EnumType.STRING)
+    private BidType type;
+
+    private Player player;
+
+    protected Bid() {
+    }
+
+    public Bid(BidLevel level, BidType type) {
+        this.level = level;
+        this.type = type;
+    }
+
+    public Bid(BidLevel level, BidType type, Player player) {
+        this.level = level;
+        this.type = type;
+        this.player = player;
+    }
+
+    public BidLevel getLevel() {
+        return level;
+    }
+
+    public BidType getType() {
+        return type;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public boolean isSpecialBid() {
+        return type == BidType.PASS || 
+               type == BidType.DOUBLE || 
+               type == BidType.REDOUBLE;
+    }
+
+    public String toString() {
+        return "Bid{" +
+                level.getAbbreviation() + type.getAbbreviation() +
+                ", Direction{" + player.getDirection() + "}" +
+                "}";
+    }
+
+}
