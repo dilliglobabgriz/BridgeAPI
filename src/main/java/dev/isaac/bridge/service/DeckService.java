@@ -2,11 +2,11 @@ package dev.isaac.bridge.service;
 
 import org.springframework.stereotype.Service;
 
-import dev.isaac.bridge.entity.Deck;
-import dev.isaac.bridge.entity.Hand;
-import dev.isaac.bridge.entity.Rank;
-import dev.isaac.bridge.entity.Suit;
-import dev.isaac.bridge.entity.Card;
+import dev.isaac.bridge.entity.enums.Rank;
+import dev.isaac.bridge.entity.enums.Suit;
+import dev.isaac.bridge.entity.model.Card;
+import dev.isaac.bridge.entity.model.Deck;
+import dev.isaac.bridge.entity.model.Hand;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -1,6 +1,9 @@
-package dev.isaac.bridge.entity;
+package dev.isaac.bridge.entity.util;
 
 import java.util.Comparator;
+
+import dev.isaac.bridge.entity.enums.Suit;
+import dev.isaac.bridge.entity.model.Card;
 
 public class CardComparator implements Comparator<Card>{
 

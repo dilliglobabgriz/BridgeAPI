@@ -1,4 +1,4 @@
-package dev.isaac.bridge.entity;
+package dev.isaac.bridge.entity.model;
 
 import javax.persistence.*;
 

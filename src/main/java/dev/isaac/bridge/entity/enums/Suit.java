@@ -1,8 +1,5 @@
-package dev.isaac.bridge.entity;
+package dev.isaac.bridge.entity.enums;
 
-import org.springframework.stereotype.Component;
-
-//@Component
 public enum Suit {
     CLUBS('C', '\u2663'),     // ♣
     DIAMONDS('D', '\u2666'),  // ♦

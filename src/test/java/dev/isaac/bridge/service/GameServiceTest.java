@@ -7,9 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import dev.isaac.bridge.BridgeApplication;
-import dev.isaac.bridge.entity.Deck;
-import dev.isaac.bridge.entity.Game;
-import dev.isaac.bridge.entity.Player;
+import dev.isaac.bridge.entity.model.Game;
+import dev.isaac.bridge.entity.model.Player;
 
 @SpringBootTest(classes = BridgeApplication.class)
 public class GameServiceTest {
@@ -19,7 +18,6 @@ public class GameServiceTest {
 
     private Game game;
 
-    //private Deck deck;
 
     @BeforeEach
     void setUp() {

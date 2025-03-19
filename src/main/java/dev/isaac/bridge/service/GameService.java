@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
-import dev.isaac.bridge.entity.Deck;
-import dev.isaac.bridge.entity.Game;
-import dev.isaac.bridge.entity.Hand;
-import dev.isaac.bridge.entity.Player;
+import dev.isaac.bridge.entity.model.Deck;
+import dev.isaac.bridge.entity.model.Game;
+import dev.isaac.bridge.entity.model.Hand;
+import dev.isaac.bridge.entity.model.Player;
 
 @Service
 public class GameService {

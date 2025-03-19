@@ -1,9 +1,10 @@
-package dev.isaac.bridge.entity;
+package dev.isaac.bridge.entity.model;
 
-import java.util.Collections;
 import java.util.Comparator;
 
 import javax.persistence.*;
+
+import dev.isaac.bridge.entity.util.CardHolder;
 
 
 @Entity

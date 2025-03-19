@@ -6,6 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import dev.isaac.bridge.entity.enums.Rank;
+import dev.isaac.bridge.entity.enums.Suit;
+import dev.isaac.bridge.entity.model.Card;
+import dev.isaac.bridge.entity.util.CardComparator;
+
 @SpringBootTest
 public class CardComparatorTest {
     
@@ -30,7 +35,7 @@ public class CardComparatorTest {
         int result = comparator.compare(c1, c2);
 
         // Expect the trump card to be higher
-        assertTrue(result < 0, "TWO of DIAMONDS (trump) should be higher than KING of CLUBS.");
+        assertTrue(result < 0, "TWO of DIAMONDS (trump) should be higher than KING of SPADES.");
     }
 
     @Test

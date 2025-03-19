@@ -4,11 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import dev.isaac.bridge.entity.CardComparator;
-import dev.isaac.bridge.entity.Game;
-import dev.isaac.bridge.entity.Hand;
-import dev.isaac.bridge.entity.Player;
-import dev.isaac.bridge.entity.Suit;
+import dev.isaac.bridge.entity.enums.Suit;
+import dev.isaac.bridge.entity.model.Game;
+import dev.isaac.bridge.entity.model.Hand;
+import dev.isaac.bridge.entity.model.Player;
+import dev.isaac.bridge.entity.util.CardComparator;
 import dev.isaac.bridge.service.DeckService;
 import dev.isaac.bridge.service.GameService;
 import org.springframework.web.bind.annotation.GetMapping;

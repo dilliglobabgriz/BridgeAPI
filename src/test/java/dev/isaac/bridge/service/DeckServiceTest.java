@@ -1,8 +1,8 @@
 package dev.isaac.bridge.service;
 
 import dev.isaac.bridge.BridgeApplication;
-import dev.isaac.bridge.entity.Deck;
-import dev.isaac.bridge.entity.Hand;
+import dev.isaac.bridge.entity.model.Deck;
+import dev.isaac.bridge.entity.model.Hand;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,7 +30,7 @@ public class DeckServiceTest {
     void testPopulateDeck() {
         deckService.populate(deck);
 
-        Assertions.assertEquals(52, deck.getCards().size(), "Populated deck should have 52 cards");
+        Assertions.assertEquals(52, deck.size(), "Populated deck should have 52 cards");
 
         long uniqueCards = deck.getCards().stream().distinct().count();
         Assertions.assertEquals(52, uniqueCards, "Deck should contain no duplicate cards");

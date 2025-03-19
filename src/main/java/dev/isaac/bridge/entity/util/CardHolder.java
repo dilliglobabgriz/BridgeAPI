@@ -1,13 +1,15 @@
-package dev.isaac.bridge.entity;
+package dev.isaac.bridge.entity.util;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 import javax.persistence.MappedSuperclass;
 
+import dev.isaac.bridge.entity.model.Card;
+
 @MappedSuperclass
-abstract class CardHolder {
-    ArrayList<Card> cards = new ArrayList<>();
+public abstract class CardHolder {
+    protected ArrayList<Card> cards = new ArrayList<>();
 
     public void addCard(Card card) {
         if (card == null) {
