@@ -1,8 +1,10 @@
 package dev.isaac.bridge.entity;
 
-import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import javax.persistence.*;
+
 
 @Entity
 public class Hand extends CardHolder{
@@ -27,6 +29,15 @@ public class Hand extends CardHolder{
     
     public Player getPlayer() {
         return this.player;
+    }
+
+    /**
+     * Sorts the collection of cards in the following order
+     * 1. Suits (Clubs, Diamonds, Hearts, Spades)
+     * 2. Rank - High to Low (A, K, ... 3, 2)
+     */
+    public void sort(Comparator<Card> comparator) {
+        cards.sort(comparator);
     }
 
     public String toString() {

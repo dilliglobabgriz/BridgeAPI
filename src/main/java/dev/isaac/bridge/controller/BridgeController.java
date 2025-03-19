@@ -4,9 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import dev.isaac.bridge.entity.CardComparator;
 import dev.isaac.bridge.entity.Game;
 import dev.isaac.bridge.entity.Hand;
 import dev.isaac.bridge.entity.Player;
+import dev.isaac.bridge.entity.Suit;
 import dev.isaac.bridge.service.DeckService;
 import dev.isaac.bridge.service.GameService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,7 +40,9 @@ public class BridgeController {
         ArrayList<String> hands = new ArrayList<>();
 
         for (Player player : game.getPlayers()) { 
-            hands.add(player.getHand().toString());
+            Hand hand = player.getHand();
+            hand.sort(new CardComparator(Suit.DIAMONDS));
+            hands.add(hand.toString());
         }
 
         return ResponseEntity.ok().body(hands);

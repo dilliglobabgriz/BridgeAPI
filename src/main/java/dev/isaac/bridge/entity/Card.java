@@ -43,6 +43,7 @@ public class Card {
     public void setRank(Rank rank) {
         this.rank = rank;
     }
+    
 
     @Override
     public String toString() {
