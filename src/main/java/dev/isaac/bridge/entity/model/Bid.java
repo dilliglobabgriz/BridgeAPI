@@ -52,11 +52,21 @@ public class Bid {
                type == BidType.REDOUBLE;
     }
 
+    @Override
     public String toString() {
         return "Bid{" +
                 level.getAbbreviation() + type.getAbbreviation() +
                 ", Direction{" + player.getDirection() + "}" +
                 "}";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+    
+        Bid bid = (Bid) obj;
+        return this.level == bid.getLevel() && this.type == bid.getType();
     }
 
 }
