@@ -100,5 +100,26 @@ public class BidHistoryServiceTest {
 
         Assertions.assertEquals(expected, actual, "All players pass so should return a pass bid.");
     }
+
+    @Test 
+    void getBiddingHistoryTest() {
+        bidHistory.addBid(new Bid(BidLevel.ONE, BidType.SPADES));     // N: 1S
+        bidHistory.addBid(new Bid(BidLevel.SPECIAL, BidType.PASS));   // E: P
+        bidHistory.addBid(new Bid(BidLevel.TWO, BidType.HEARTS));     // S: 2H
+        bidHistory.addBid(new Bid(BidLevel.SPECIAL, BidType.PASS));   // W: P
+        bidHistory.addBid(new Bid(BidLevel.TWO, BidType.NO_TRUMP));   // N: 2NT
+        bidHistory.addBid(new Bid(BidLevel.SPECIAL, BidType.DOUBLE)); // E: X
+        bidHistory.addBid(new Bid(BidLevel.SPECIAL, BidType.PASS));   // S: P
+        bidHistory.addBid(new Bid(BidLevel.SPECIAL, BidType.PASS));   // W: P
+        bidHistory.addBid(new Bid(BidLevel.THREE, BidType.SPADES));   // N: 3S
+        bidHistory.addBid(new Bid(BidLevel.SPECIAL, BidType.PASS));   // E: P
+        bidHistory.addBid(new Bid(BidLevel.SPECIAL, BidType.PASS));   // S: P
+        bidHistory.addBid(new Bid(BidLevel.SPECIAL, BidType.PASS));   // W: P
+
+        int expected = 12; // Bids made
+        int actual = bidHistory.getBids().size();
+
+        Assertions.assertEquals(expected, actual, "There should be 12 bids in the bid history.");
+    }
     
 }

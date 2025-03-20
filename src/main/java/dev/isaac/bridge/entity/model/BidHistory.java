@@ -25,7 +25,7 @@ public class BidHistory {
             ArrayList<Bid> playerBids = new ArrayList<>();
 
             for (Bid bid : bids) {
-                if (bid.getPlayer().getDirection() == direction) {
+                if (bid.getPlayerDirection() == direction) {
                     playerBids.add(bid);
                 }
             }

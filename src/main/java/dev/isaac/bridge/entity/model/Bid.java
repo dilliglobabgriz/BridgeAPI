@@ -18,7 +18,7 @@ public class Bid {
     @Enumerated(EnumType.STRING)
     private BidType type;
 
-    private Player player;
+    private Player.Direction playerDirection;
 
     protected Bid() {
     }
@@ -28,10 +28,10 @@ public class Bid {
         this.type = type;
     }
 
-    public Bid(BidLevel level, BidType type, Player player) {
+    public Bid(BidLevel level, BidType type, Player.Direction playerDirection) {
         this.level = level;
         this.type = type;
-        this.player = player;
+        this.playerDirection = playerDirection;
     }
 
     public BidLevel getLevel() {
@@ -42,8 +42,8 @@ public class Bid {
         return type;
     }
 
-    public Player getPlayer() {
-        return player;
+    public Player.Direction getPlayerDirection() {
+        return playerDirection;
     }
 
     public boolean isSpecialBid() {
@@ -56,7 +56,7 @@ public class Bid {
     public String toString() {
         return "Bid{" +
                 level.getAbbreviation() + type.getAbbreviation() +
-                ", Direction{" + player.getDirection() + "}" +
+                ", Direction{" + playerDirection + "}" +
                 "}";
     }
 

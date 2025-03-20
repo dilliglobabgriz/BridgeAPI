@@ -24,11 +24,14 @@ public class Game {
     @Enumerated(EnumType.STRING) 
     private Player.Direction dealer;
 
+    private BidHistory bidHistory;
+
     public enum GameState {
         WAITING_FOR_PLAYERS, BIDDING, PLAYING, COMPLETED
     }
 
     public Game() {
+        bidHistory = new BidHistory();
     }
 
      // Getters and setters
@@ -89,6 +92,14 @@ public class Game {
             case WEST: return Player.Direction.NORTH;
             default: return null;
         }
+    }
+
+    public void addBid(Bid bid) {
+        bidHistory.addBid(bid);
+    }
+
+    public BidHistory getBidHistory() {
+        return bidHistory;
     }
     
     @Override
