@@ -18,6 +18,14 @@ public enum BidType {
         this.symbol = symbol;
     }
 
+    public boolean isSuitOrNoTrump() {
+        return this == CLUBS || 
+               this == DIAMONDS || 
+               this == HEARTS || 
+               this == SPADES || 
+               this == NO_TRUMP;
+    }
+
     public char getAbbreviation() {
         return abbreviation;
     }
