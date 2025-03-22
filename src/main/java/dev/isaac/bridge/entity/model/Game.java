@@ -26,12 +26,24 @@ public class Game {
 
     private BidHistory bidHistory;
 
+    private TrickHistory trickHistory;
+
     public enum GameState {
         WAITING_FOR_PLAYERS, BIDDING, PLAYING, COMPLETED
     }
 
     public Game() {
+        dealer = Player.Direction.NORTH;
+
         bidHistory = new BidHistory();
+        trickHistory = new TrickHistory(dealer);
+    }
+
+    public Game(Player.Direction dealer) {
+        this.dealer = dealer;
+
+        bidHistory = new BidHistory();
+        trickHistory = new TrickHistory(dealer);
     }
 
      // Getters and setters
@@ -84,6 +96,15 @@ public class Game {
         return null;
     }
     
+
+    public void addBid(Bid bid) {
+        bidHistory.addBid(bid);
+    }
+
+    public BidHistory getBidHistory() {
+        return bidHistory;
+    }
+
     public Player.Direction getNextPlayerDirection(Player.Direction current) {
         switch (current) {
             case NORTH: return Player.Direction.EAST;
@@ -94,12 +115,8 @@ public class Game {
         }
     }
 
-    public void addBid(Bid bid) {
-        bidHistory.addBid(bid);
-    }
-
-    public BidHistory getBidHistory() {
-        return bidHistory;
+    public TrickHistory getTrickHistory() {
+        return trickHistory;
     }
     
     @Override

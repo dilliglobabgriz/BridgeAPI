@@ -27,6 +27,11 @@ public class Card {
         this.rank = rank;
     }
 
+    public Card(Card card) {
+        this.suit = card.getSuit();
+        this.rank = card.getRank();
+    }
+
     public Long getId() {
         return id;
     }

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import dev.isaac.bridge.entity.enums.BidLevel;
 import dev.isaac.bridge.entity.enums.BidType;
 import dev.isaac.bridge.entity.model.Bid;
-import dev.isaac.bridge.entity.model.BidHistory;
 import dev.isaac.bridge.entity.model.Deck;
 import dev.isaac.bridge.entity.model.Game;
 import dev.isaac.bridge.entity.model.Hand;
@@ -94,9 +93,9 @@ public class GameService {
         initializeGame();
         populatePlayerHands(game);
 
-        game.setDealer(Player.Direction.NORTH);
         Player.Direction currentPlayer = game.getDealer();
 
+        // Will be replaced by input from users or bots
         ArrayList<Bid> customBids = new ArrayList<>();
         customBids.add(new Bid(BidLevel.ONE, BidType.SPADES));     // N: 1S
         customBids.add(new Bid(BidLevel.SPECIAL, BidType.PASS));   // E: P
@@ -121,6 +120,7 @@ public class GameService {
 
         // Set state to PLAY once bidding is done
         game.setState(Game.GameState.PLAYING);
+
     }
 
     /**

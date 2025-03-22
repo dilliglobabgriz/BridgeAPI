@@ -18,6 +18,11 @@ public abstract class CardHolder {
         cards.add(card);
     }
 
+    public void setCards(ArrayList<Card> newCards) {
+        cards.clear();
+        cards = newCards;
+    }
+
     public ArrayList<Card> getCards() {
         return cards;
     }

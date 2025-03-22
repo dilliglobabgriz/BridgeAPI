@@ -30,7 +30,7 @@ public class Trick extends CardHolder {
         String s = "";
 
         for (Card card : cards) {
-            s += card.toString();
+            s += card.toString() + ", ";
         }
 
         return s;

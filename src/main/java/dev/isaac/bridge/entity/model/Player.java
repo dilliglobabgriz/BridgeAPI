@@ -40,6 +40,16 @@ public class Player {
         return this.direction;
     }
 
+    public Player.Direction getNextPlayerDirection(Player.Direction current) {
+        switch (current) {
+            case NORTH: return Player.Direction.EAST;
+            case EAST: return Player.Direction.SOUTH;
+            case SOUTH: return Player.Direction.WEST;
+            case WEST: return Player.Direction.NORTH;
+            default: return null;
+        }
+    }
+
     public void setName(String name) {
         this.name = name;
     }

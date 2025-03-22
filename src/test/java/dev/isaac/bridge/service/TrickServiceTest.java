@@ -10,13 +10,14 @@ import dev.isaac.bridge.BridgeApplication;
 import dev.isaac.bridge.entity.enums.Rank;
 import dev.isaac.bridge.entity.enums.Suit;
 import dev.isaac.bridge.entity.model.Card;
+import dev.isaac.bridge.entity.model.Player;
 import dev.isaac.bridge.entity.model.Trick;
 
 @SpringBootTest(classes = BridgeApplication.class)
 public class TrickServiceTest {
     
     @Autowired 
-    private TrickService trickService;
+    private TrickHistoryService trickService;
 
     private Trick trick;
 
@@ -62,5 +63,18 @@ public class TrickServiceTest {
         Card actual = trickService.getWinningCard(trick, Suit.CLUBS);
 
         Assertions.assertEquals(expected, actual, "Seven of clubs should win this trick");
+    }
+
+    @Test 
+    void testGetWinningDirection() {
+        trick.addCard(new Card(Rank.KING, Suit.CLUBS));
+        trick.addCard(new Card(Rank.TWO, Suit.CLUBS));
+        trick.addCard(new Card(Rank.ACE, Suit.SPADES));
+        trick.addCard(new Card(Rank.THREE, Suit.HEARTS));
+
+        Player.Direction expected = Player.Direction.WEST;
+        Player.Direction actual = trickService.getWinningDirection(trick, new Card(Rank.THREE, Suit.HEARTS), Player.Direction.NORTH);
+
+        Assertions.assertEquals(expected, actual, "West should win with 3 of hearts.");
     }
 }
