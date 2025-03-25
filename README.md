@@ -13,7 +13,9 @@ Currently in progress, to run tests use Maven with the command ```mvn test```
 | eastId               | integer   | FOREIGN KEY                    | East player ID               |
 | southId              | integer   | FOREIGN KEY                    | South player ID              |
 | westId               | integer   | FOREIGN KEY                    | West player ID               |
-| firstDealerDirection | integer   |                                | [0-3] refers to N, S, E, W   |\
+| firstDealerDirection | integer   |                                | [0-3] refers to N, S, E, W   |
+| northSouthScore      | integer   | DEFAULT 0                      | Update after each hand       |
+| eastWestScore        | integer   | DEFAULT 0                      | Update after each hand       |
 
 FOREIGN KEY (northId) REFERENCES Player(playerId)   *(Same for other directions)*
 
