@@ -5,24 +5,33 @@ import javax.persistence.*;
 import java.util.ArrayList;
 
 @Entity
+@Table(name="game")
 public class Game {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    
+    @Column(name="gameId")
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "game_id")
-    private ArrayList<Player> players = new ArrayList<>();
+    @Column(name="dealer")
+    @Enumerated(EnumType.STRING) 
+    private Player.Direction dealer;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "game_id")
+    @Column(name="northId")
+    private long northId;
+
+    @Column(name="southId")
+    private long southId;
+
+    @Column(name="eastId")
+    private long eastId;
+
+    @Column(name="westId")
+    private long westId;
+
     private Deck deck;
 
     @Enumerated(EnumType.STRING) 
     private GameState state;
-
-    @Enumerated(EnumType.STRING) 
-    private Player.Direction dealer;
 
     private BidHistory bidHistory;
 
@@ -46,23 +55,18 @@ public class Game {
         trickHistory = new TrickHistory(dealer);
     }
 
+    public Game(long northId, long eastId, long southId, long westId) {
+        this.northId = northId;
+        this.eastId = eastId;
+        this.southId = southId;
+        this.westId = westId;
+    }
+
      // Getters and setters
      public Long getId() {
         return id;
     }
-    
-    public ArrayList<Player> getPlayers() {
-        return players;
-    }
-    
-    public void setPlayers(ArrayList<Player> players) {
-        this.players = players;
-    }
-    
-    public void addPlayer(Player player) {
-        players.add(player);
-    }
-    
+
     public Deck getDeck() {
         return deck;
     }
@@ -86,16 +90,6 @@ public class Game {
     public void setDealer(Player.Direction dealer) {
         this.dealer = dealer;
     }
-
-    public Player getPlayerByDirection(Player.Direction direction) {
-        for (Player player : players) {
-            if (player.getDirection() == direction) {
-                return player;
-            }
-        }
-        return null;
-    }
-    
 
     public void addBid(Bid bid) {
         bidHistory.addBid(bid);
@@ -124,7 +118,7 @@ public class Game {
         return "Game{" +
                 "id=" + id +
                 ", state=" + state +
-                ", playerCount=" + players.size() +
+                ", dealer=" + dealer +
                 '}';
     }
 }

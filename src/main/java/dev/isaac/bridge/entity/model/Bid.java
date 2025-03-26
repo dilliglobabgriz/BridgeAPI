@@ -38,6 +38,10 @@ public class Bid {
         return level;
     }
 
+    public long getId() {
+        return id;
+    }
+
     public BidType getType() {
         return type;
     }

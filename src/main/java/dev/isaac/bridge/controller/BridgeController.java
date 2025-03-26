@@ -14,6 +14,7 @@ import dev.isaac.bridge.service.DeckService;
 import dev.isaac.bridge.service.GameService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 //import dev.isaac.bridge.entity.Deck;
 
 @RestController
+@RequestMapping(path = "/api/games")
 public class BridgeController {
 
     private final GameService gameService;

@@ -87,4 +87,7 @@ Requirements can all be found in the pom.xml but I am running this using Java 17
 + Adding more extensive trick or bid history to DB
 + Better UI
 
+## Dev Notes
++ Figure out BidType to Suit conversion to deal with NT bid and trump cases
++ Create Hand(for game) and Hand(for players) as seperate classes
 
