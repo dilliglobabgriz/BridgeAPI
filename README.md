@@ -1,4 +1,5 @@
 # Bridge API
+Java Spring Boot bridge application
 ## How to use
 
 Currently in progress, to run tests use Maven with the command ```mvn test```
@@ -65,11 +66,25 @@ Full stack web application using Java's SpringBoot framework. Allows users to pl
 Requirements can all be found in the pom.xml but I am running this using Java 17 and Spring Boot 3.4.3
 
 ## Steps
-1. Initialize 4 players, human or bot
+1. Initialize 4 players
+    1.1 4 bots
 2. Initialize a new game connecting player ids to game (save to DB)
 3. Initialize a new hand
     3.1 Deal 13 cards per player
     3.2 Save cards with handId and playerId foreign keys
-    3.3 Get bids and save winning bid
+4. Start the bidding process
+    4.1 Get bids from each player until a final contract is determined
+    4.2 Save the winning contract and the player who bid it to the hand
+5. Start the trick taking process
+    5.1 Get one card from each player starting with left of dealer
+    5.2 Determine who won the trick and keep score
+6. Score the hand
+    6.1 Determine the score based on the contract, tricks taken, and vulnerability
+7. Save game/hand to the DB
+
+## Possible Future Features
++ One or more human players
++ Adding more extensive trick or bid history to DB
++ Better UI
 
 
