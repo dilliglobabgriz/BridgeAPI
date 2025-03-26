@@ -9,11 +9,11 @@ Currently in progress, to run tests use Maven with the command ```mvn test```
 ### Game
 | Column               | Type      | Constraints                    | Description                  |
 |----------------------|-----------|--------------------------------|------------------------------|
-| gameId               | integer   | PRIMARY KEY AUTO_INCREMENT     | Game identifier              |
-| northId              | integer   | FOREIGN KEY                    | North player ID              |
-| eastId               | integer   | FOREIGN KEY                    | East player ID               |
-| southId              | integer   | FOREIGN KEY                    | South player ID              |
-| westId               | integer   | FOREIGN KEY                    | West player ID               |
+| gameId               | long      | PRIMARY KEY AUTO_INCREMENT     | Game identifier              |
+| northId              | long      | FOREIGN KEY                    | North player ID              |
+| eastId               | long      | FOREIGN KEY                    | East player ID               |
+| southId              | long      | FOREIGN KEY                    | South player ID              |
+| westId               | long      | FOREIGN KEY                    | West player ID               |
 | firstDealerDirection | integer   | DEFAULT 0                      | [0-3] refers to N, S, E, W   |
 | northSouthScore      | integer   | DEFAULT 0                      | Update after each hand       |
 | eastWestScore        | integer   | DEFAULT 0                      | Update after each hand       |
@@ -22,9 +22,9 @@ Currently in progress, to run tests use Maven with the command ```mvn test```
 ### Hand
 | Column               | Type      | Constraints                    | Description                  |
 |----------------------|-----------|--------------------------------|------------------------------|
-| handId               | integer   | PRIMARY KEY AUTO_INCREMENT     | Hand identifier              |
-| gameId               | integer   | FOREIGN KEY                    | Associated game ID           |
-| winningBidId         | integer   | FOREIGN KEY                    | Associated Bid               |
+| handId               | long      | PRIMARY KEY AUTO_INCREMENT     | Hand identifier              |
+| gameId               | long      | FOREIGN KEY                    | Associated game ID           |
+| winningBidId         | long      | FOREIGN KEY                    | Associated Bid               |
 | dealerDirection      | integer   |                                | [0-3] refers to N, S, E, W   |
 | northSouthTricksTaken| integer   |                                | Tricks taken by N/S          |
 | eastWestTricksTaken  | integer   |                                | Tricks taken by E/W          |
@@ -32,7 +32,7 @@ Currently in progress, to run tests use Maven with the command ```mvn test```
 ### Bid
 | Column      | Type    | Constraints                | Description                 |
 |-------------|---------|----------------------------|-----------------------------|
-| bidId       | integer | PRIMARY KEY AUTO_INCREMENT | Bid identifier              |
+| bidId       | long    | PRIMARY KEY AUTO_INCREMENT | Bid identifier              |
 | direction   | integer |                            | [0-3] refers to N, S, E, W  |
 | suit        | integer |                            | [0-4] refers C, D, H, S, NT |
 | level       | integer |                            | [1-7]                       |
@@ -42,7 +42,7 @@ Currently in progress, to run tests use Maven with the command ```mvn test```
 ### Player
 | Column   | Type        | Constraints                | Description          |
 |----------|-------------|---------------------------|----------------------|
-| playerId | integer     | PRIMARY KEY AUTO_INCREMENT| Player identifier    |
+| playerId | long        | PRIMARY KEY AUTO_INCREMENT| Player identifier    |
 | botVersion| integer    | DEFAULT 1                  | 0 for human player   |
 | name     | varchar(255)| DEFAULT 'Computer'         | Player name          |
     
@@ -50,8 +50,8 @@ Currently in progress, to run tests use Maven with the command ```mvn test```
 ### Cards
 | Column   | Type       | Constraints                 | Description          |
 |----------|------------|-----------------------------|----------------------|
-| handId   | integer    | FOREIGN KEY                 | Associated handId    |
-| playerId | integer    | FOREIGN KEY                 | Associated playerId  |
+| handId   | long       | FOREIGN KEY                 | Associated handId    |
+| playerId | long       | FOREIGN KEY                 | Associated playerId  |
 | card0    | varchar(2) |                             | RankABV, SuitABV     |
 | ...      |            |                             |                      |
 | card12   | varchar(2) |                             | Last card in hand    |
@@ -67,19 +67,19 @@ Requirements can all be found in the pom.xml but I am running this using Java 17
 
 ## Steps
 1. Initialize 4 players
-    1.1 4 bots
+    + 4 bots
 2. Initialize a new game connecting player ids to game (save to DB)
 3. Initialize a new hand
-    3.1 Deal 13 cards per player
-    3.2 Save cards with handId and playerId foreign keys
+    + Deal 13 cards per player
+    + Save cards with handId and playerId foreign keys
 4. Start the bidding process
-    4.1 Get bids from each player until a final contract is determined
-    4.2 Save the winning contract and the player who bid it to the hand
+    + Get bids from each player until a final contract is determined
+    + Save the winning contract and the player who bid it to the hand
 5. Start the trick taking process
-    5.1 Get one card from each player starting with left of dealer
-    5.2 Determine who won the trick and keep score
+    + Get one card from each player starting with left of dealer
+    + Determine who won the trick and keep score
 6. Score the hand
-    6.1 Determine the score based on the contract, tricks taken, and vulnerability
+    + Determine the score based on the contract, tricks taken, and vulnerability
 7. Save game/hand to the DB
 
 ## Possible Future Features
