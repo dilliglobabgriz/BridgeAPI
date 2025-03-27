@@ -13,8 +13,10 @@ import dev.isaac.bridge.entity.enums.BidLevel;
 import dev.isaac.bridge.entity.enums.BidType;
 import dev.isaac.bridge.entity.enums.Direction;
 import dev.isaac.bridge.entity.model.Bid;
+import dev.isaac.bridge.entity.model.BidHistory;
 import dev.isaac.bridge.entity.model.Game;
 import dev.isaac.bridge.entity.model.Player;
+import dev.isaac.bridge.entity.model.Round;
 
 @SpringBootTest(classes = BridgeApplication.class)
 public class GameServiceTest {
@@ -63,12 +65,16 @@ public class GameServiceTest {
         customBids.add(new Bid(BidLevel.SPECIAL, BidType.PASS));   // S: P
         customBids.add(new Bid(BidLevel.SPECIAL, BidType.PASS));   // W: P
 
+        game.addRound(new Round());
+
+        BidHistory bidHistory = game.getCurrentRound().getBidHistory();
+
         for (Bid bid : customBids) {
-            game.addBid(bid);
+            bidHistory.addBid(bid);
         }
 
         int expected = 12;
-        int actual = game.getBidHistory().getBids().size();
+        int actual = bidHistory.getBids().size();
 
         Assertions.assertEquals(expected, actual, "Bid history should have 12 bids.");
     }

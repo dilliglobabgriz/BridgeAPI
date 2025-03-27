@@ -35,9 +35,7 @@ public class Game {
     @Enumerated(EnumType.STRING) 
     private GameState state;
 
-    private BidHistory bidHistory;
-
-    private TrickHistory trickHistory;
+    private ArrayList<Round> rounds;
 
     public enum GameState {
         WAITING_FOR_PLAYERS, BIDDING, PLAYING, COMPLETED
@@ -45,16 +43,12 @@ public class Game {
 
     public Game() {
         dealer = Direction.NORTH;
-
-        bidHistory = new BidHistory();
-        trickHistory = new TrickHistory(dealer);
+        rounds = new ArrayList<Round>();
     }
 
     public Game(Direction dealer) {
         this.dealer = dealer;
-
-        bidHistory = new BidHistory();
-        trickHistory = new TrickHistory(dealer);
+        rounds = new ArrayList<Round>();
     }
 
     public Game(long northId, long eastId, long southId, long westId) {
@@ -93,16 +87,16 @@ public class Game {
         this.dealer = dealer;
     }
 
-    public void addBid(Bid bid) {
-        bidHistory.addBid(bid);
+    public void addRound(Round round) {
+        rounds.add(round);
     }
 
-    public BidHistory getBidHistory() {
-        return bidHistory;
+    public ArrayList<Round> getRounds () {
+        return rounds;
     }
 
-    public TrickHistory getTrickHistory() {
-        return trickHistory;
+    public Round getCurrentRound() {
+        return rounds.get(rounds.size() - 1);
     }
     
     @Override

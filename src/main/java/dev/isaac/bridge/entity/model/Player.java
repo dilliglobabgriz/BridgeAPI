@@ -15,9 +15,6 @@ public class Player {
 
     private String name;
 
-    // Connection with hand each player can only have one hand
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "hand_id")
     private Hand hand;
 
     public Player() {}

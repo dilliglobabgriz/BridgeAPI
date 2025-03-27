@@ -15,6 +15,7 @@ import dev.isaac.bridge.entity.model.Bid;
 import dev.isaac.bridge.entity.model.BidHistory;
 import dev.isaac.bridge.entity.model.Card;
 import dev.isaac.bridge.entity.model.Game;
+import dev.isaac.bridge.entity.model.Round;
 import dev.isaac.bridge.entity.model.TrickHistory;
 import dev.isaac.bridge.exception.InvalidBidException;
 import dev.isaac.bridge.service.BidHistoryService;
@@ -25,13 +26,10 @@ import dev.isaac.bridge.service.TrickHistoryService;
 @RequestMapping(path = "/api/games")
 public class GameAPIController {
 
-    @Autowired
     private GameService gameService;
 
-    @Autowired 
     private BidHistoryService bidHistoryService;
 
-    @Autowired 
     private TrickHistoryService trickHistoryService;
 
     public GameAPIController(GameService gameService, BidHistoryService bidHisotryService, TrickHistoryService trickHistoryService) {
@@ -62,13 +60,14 @@ public class GameAPIController {
     @PostMapping(path = "{gameId}/bid")
     public ResponseEntity<Void> makeBid(@PathVariable long gameId, Bid bid) {
         Game game = gameService.getGameById(gameId);
-        BidHistory bidHistory = game.getBidHistory();
+        Round round = game.getRounds().get(game.getRounds().size() - 1);
+        BidHistory bidHistory = round.getBidHistory();
 
         if (!bidHistoryService.isValidBid(bidHistory, bid)) {
             throw new InvalidBidException(bid.toString() + " is not a valid bid");
         }
         
-        bidHistoryService.addBid(game, bid);
+        bidHistoryService.addBid(round, bid);
         
 
         return ResponseEntity.ok().build();
@@ -85,7 +84,7 @@ public class GameAPIController {
     @PostMapping(path = "{gameId}/pick")
     public ResponseEntity<Direction> pickCard(@PathVariable long gameId, Card card) {
         Game game = gameService.getGameById(gameId);
-        TrickHistory trickHistory = game.getTrickHistory();
+        TrickHistory trickHistory = game.getRounds().get(game.getRounds().size() - 1).getTrickHistory();
 
         Direction nextDirection = trickHistoryService.addCard(trickHistory, card);
 

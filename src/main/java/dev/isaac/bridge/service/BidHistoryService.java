@@ -7,6 +7,7 @@ import dev.isaac.bridge.entity.enums.BidType;
 import dev.isaac.bridge.entity.model.Bid;
 import dev.isaac.bridge.entity.model.BidHistory;
 import dev.isaac.bridge.entity.model.Game;
+import dev.isaac.bridge.entity.model.Round;
 import dev.isaac.bridge.exception.InvalidBidException;
 
 @Service
@@ -23,17 +24,21 @@ public class BidHistoryService {
      * @param bid
      * @return
      */
-    public Bid addBid(Game game, Bid bid) {
-        BidHistory bidHistory = game.getBidHistory();
+    public Bid addBid(Round round, Bid bid) {
+        BidHistory bidHistory = round.getBidHistory();
+
+        if (round.getWinningBid() != null) {
+            throw new InvalidBidException("Bidding is already completed.");
+        }
 
         if (!isValidBid(bidHistory, bid)) {
-            throw new InvalidBidException("bid is not legal");
+            throw new InvalidBidException("Bid is not legal.");
         }
 
         bidHistory.addBid(bid);
 
         if (isBiddingDone(bidHistory)) {
-            game.getTrickHistory().setTrump(getLastContractBid(bidHistory).getType());
+            round.setWinningBid(getLastContractBid(bidHistory));
         }
 
         return bid;

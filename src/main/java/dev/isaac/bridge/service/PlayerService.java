@@ -11,7 +11,6 @@ public class PlayerService {
     
     PlayerRepository playerRepo;
 
-    @Autowired 
     public PlayerService(PlayerRepository playerRepo) {
         this.playerRepo = playerRepo;
     }
