@@ -19,10 +19,10 @@ Currently in progress, to run tests use Maven with the command ```mvn test```
 | eastWestScore        | integer   | DEFAULT 0                      | Update after each hand       |
 
 
-### Hand
+### Round
 | Column               | Type      | Constraints                    | Description                  |
 |----------------------|-----------|--------------------------------|------------------------------|
-| handId               | long      | PRIMARY KEY AUTO_INCREMENT     | Hand identifier              |
+| roundId              | long      | PRIMARY KEY AUTO_INCREMENT     | Round identifier              |
 | gameId               | long      | FOREIGN KEY                    | Associated game ID           |
 | winningBidId         | long      | FOREIGN KEY                    | Associated Bid               |
 | dealerDirection      | integer   |                                | [0-3] refers to N, S, E, W   |
@@ -47,10 +47,10 @@ Currently in progress, to run tests use Maven with the command ```mvn test```
 | name     | varchar(255)| DEFAULT 'Computer'         | Player name          |
     
 
-### Cards
+### Hand
 | Column   | Type       | Constraints                 | Description          |
 |----------|------------|-----------------------------|----------------------|
-| handId   | long       | FOREIGN KEY                 | Associated handId    |
+| roundId  | long       | FOREIGN KEY                 | Associated roundId   |
 | playerId | long       | FOREIGN KEY                 | Associated playerId  |
 | card0    | varchar(2) |                             | RankABV, SuitABV     |
 | ...      |            |                             |                      |
@@ -69,18 +69,18 @@ Requirements can all be found in the pom.xml but I am running this using Java 17
 1. Initialize 4 players
     + 4 bots
 2. Initialize a new game connecting player ids to game (save to DB)
-3. Initialize a new hand
+3. Initialize a new round
     + Deal 13 cards per player
-    + Save cards with handId and playerId foreign keys
+    + Save hand with roundId and playerId foreign keys
 4. Start the bidding process
     + Get bids from each player until a final contract is determined
     + Save the winning contract and the player who bid it to the hand
 5. Start the trick taking process
     + Get one card from each player starting with left of dealer
     + Determine who won the trick and keep score
-6. Score the hand
+6. Score the round
     + Determine the score based on the contract, tricks taken, and vulnerability
-7. Save game/hand to the DB
+7. Save game/round to the DB
 
 ## Possible Future Features
 + One or more human players
