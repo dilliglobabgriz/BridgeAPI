@@ -27,7 +27,7 @@ public class DeckService {
         
         deck.clear();
 
-        for (Suit suit : Suit.values()) {
+        for (Suit suit : Suit.getSuits()) {
             for (Rank rank : Rank.values()) {
                 Card curCard = new Card(rank, suit);
                 deck.addCard(curCard);

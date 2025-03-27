@@ -33,5 +33,16 @@ public enum BidType {
     public char getSymbol() {
         return symbol;
     }
+
+    public Suit toSuit() {
+        switch (this) {
+            case CLUBS: return Suit.CLUBS;
+            case DIAMONDS: return Suit.DIAMONDS;
+            case HEARTS: return Suit.HEARTS;
+            case SPADES: return Suit.SPADES;
+            case NO_TRUMP: return Suit.NO_TRUMP; 
+            default: return null;  
+        }
+    }
 }
 

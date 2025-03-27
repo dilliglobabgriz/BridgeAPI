@@ -2,6 +2,8 @@ package dev.isaac.bridge.entity.model;
 
 import javax.persistence.*;
 
+import dev.isaac.bridge.entity.enums.Direction;
+
 import java.util.ArrayList;
 
 @Entity
@@ -14,7 +16,7 @@ public class Game {
 
     @Column(name="dealer")
     @Enumerated(EnumType.STRING) 
-    private Player.Direction dealer;
+    private Direction dealer;
 
     @Column(name="northId")
     private long northId;
@@ -42,13 +44,13 @@ public class Game {
     }
 
     public Game() {
-        dealer = Player.Direction.NORTH;
+        dealer = Direction.NORTH;
 
         bidHistory = new BidHistory();
         trickHistory = new TrickHistory(dealer);
     }
 
-    public Game(Player.Direction dealer) {
+    public Game(Direction dealer) {
         this.dealer = dealer;
 
         bidHistory = new BidHistory();
@@ -83,11 +85,11 @@ public class Game {
         this.state = state;
     }
     
-    public Player.Direction getDealer() {
+    public Direction getDealer() {
         return dealer;
     }
     
-    public void setDealer(Player.Direction dealer) {
+    public void setDealer(Direction dealer) {
         this.dealer = dealer;
     }
 
@@ -97,16 +99,6 @@ public class Game {
 
     public BidHistory getBidHistory() {
         return bidHistory;
-    }
-
-    public Player.Direction getNextPlayerDirection(Player.Direction current) {
-        switch (current) {
-            case NORTH: return Player.Direction.EAST;
-            case EAST: return Player.Direction.SOUTH;
-            case SOUTH: return Player.Direction.WEST;
-            case WEST: return Player.Direction.NORTH;
-            default: return null;
-        }
     }
 
     public TrickHistory getTrickHistory() {

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import org.springframework.stereotype.Service;
 
 import dev.isaac.bridge.entity.enums.BidType;
+import dev.isaac.bridge.entity.enums.Direction;
 import dev.isaac.bridge.entity.enums.Suit;
 import dev.isaac.bridge.entity.model.Card;
 import dev.isaac.bridge.entity.model.Game;
@@ -26,7 +27,7 @@ public class TrickHistoryService {
      * @param card
      * @return the next player to act, null if hand is over
      */
-    public Player.Direction addCard(TrickHistory trickHistory, Card card) {
+    public Direction addCard(TrickHistory trickHistory, Card card) {
         // Make sure bidding is done before adding cards
         if (trickHistory.getTrump() == null) {
             throw new BiddingNotCompleteException("Cannot start playing cards until bidding is done and a trump suit is determined.");
@@ -36,12 +37,20 @@ public class TrickHistoryService {
 
         Trick lastTrick = tricks.get(tricks.size() - 1);
     
-        Player.Direction leader = trickHistory.getLastTrickWinner();
+        Direction leader = trickHistory.getLastTrickWinner();
+
+        int stepsFromLeader;
 
         // 4th card in trick
         if (lastTrick.size() == 3) {
             lastTrick.addCard(card);
             Card winningCard = getWinningCard(lastTrick, trickHistory.getTrump());
+
+            stepsFromLeader = lastTrick.getCards().indexOf(winningCard);
+        } else {
+            lastTrick.addCard(card);
+            
+            stepsFromLeader = lastTrick.size();
         }
 
         // Check if this is the last card of the hand
@@ -49,7 +58,11 @@ public class TrickHistoryService {
             return null;
         }
 
-        return nextDirection;
+        for (int i=0; i<stepsFromLeader; i++) {
+            leader = leader.getNext();
+        }
+
+        return leader;
 
     }
     
@@ -66,6 +79,8 @@ public class TrickHistoryService {
         if (trick.size() != 4) {
             throw new IllegalStateException("Trick must have exactly 4 cards.");
         }
+
+        Suit trumpSuit = trump.toSuit();
         
         Suit leadSuit = trick.peekTopCard().getSuit();
     
@@ -75,7 +90,7 @@ public class TrickHistoryService {
             clonedTrick.addCard(new Card(card));
         }
 
-        clonedTrick.sort(new TrickComparator(leadSuit, trump));
+        clonedTrick.sort(new TrickComparator(leadSuit, trumpSuit));
 
         //System.out.println("Cloned Trick: " + clonedTrick.toString());
         //System.out.println("Trick: " + trick.toString());
@@ -84,22 +99,19 @@ public class TrickHistoryService {
 
     }
 
-    public Player.Direction getWinningDirection(Trick trick, Card winningCard, Player.Direction leadDirection) {
-        Game util = new Game();
-
-        int distanceFromLeader = 0;
-
-        for (Card card : trick.getCards()) {
-            if (card.equals(winningCard)) {
-                for (int i=0; i<distanceFromLeader; i++) {
-                    leadDirection = util.getNextPlayerDirection(leadDirection);
-                }
-            }
-
-            distanceFromLeader++;
+    public Direction getWinningDirection(Trick trick, Card winningCard, Direction leadDirection) {
+        int winningIndex = trick.getCards().indexOf(winningCard);
+    
+        if (winningIndex == -1) {
+            throw new IllegalArgumentException("Winning card not found in the trick.");
         }
-
+    
+        for (int i = 0; i < winningIndex; i++) {
+            leadDirection = leadDirection.getNext();
+        }
+    
         return leadDirection;
     }
+    
 
 }

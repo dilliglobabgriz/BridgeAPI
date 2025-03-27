@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import dev.isaac.bridge.entity.enums.Direction;
 import dev.isaac.bridge.entity.model.Bid;
 import dev.isaac.bridge.entity.model.BidHistory;
 import dev.isaac.bridge.entity.model.Card;
 import dev.isaac.bridge.entity.model.Game;
-import dev.isaac.bridge.entity.model.Player;
 import dev.isaac.bridge.entity.model.TrickHistory;
 import dev.isaac.bridge.exception.InvalidBidException;
 import dev.isaac.bridge.service.BidHistoryService;
@@ -83,11 +83,11 @@ public class GameAPIController {
      * @return the next play direction to go
      */
     @PostMapping(path = "{gameId}/pick")
-    public ResponseEntity<Player.Direction> pickCard(@PathVariable long gameId, Card card) {
+    public ResponseEntity<Direction> pickCard(@PathVariable long gameId, Card card) {
         Game game = gameService.getGameById(gameId);
         TrickHistory trickHistory = game.getTrickHistory();
 
-        Player.Direction nextDirection = trickHistoryService.addCard(trickHistory, card);
+        Direction nextDirection = trickHistoryService.addCard(trickHistory, card);
 
         return ResponseEntity.ok().body(nextDirection);
     }

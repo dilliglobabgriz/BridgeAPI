@@ -4,7 +4,8 @@ public enum Suit {
     CLUBS('C', '\u2663'),     // ♣
     DIAMONDS('D', '\u2666'),  // ♦
     HEARTS('H', '\u2665'),    // ♥
-    SPADES('S', '\u2660');    // ♠
+    SPADES('S', '\u2660'),    // ♠
+    NO_TRUMP('N', '-');
 
     private final char abbreviation;
     private final char symbol;
@@ -20,5 +21,9 @@ public enum Suit {
 
     public char getSymbol() {
         return symbol;
+    }
+
+    public static Suit[] getSuits() {
+        return new Suit[]{CLUBS, DIAMONDS, HEARTS, SPADES};
     }
 }

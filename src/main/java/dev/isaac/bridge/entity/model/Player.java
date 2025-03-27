@@ -2,15 +2,13 @@ package dev.isaac.bridge.entity.model;
 
 import javax.persistence.*;
 
+import dev.isaac.bridge.entity.enums.Direction;
+
 @Entity
 public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    public enum Direction {
-        NORTH, EAST, SOUTH, WEST
-    }
 
     @Enumerated(EnumType.STRING)
     private Direction direction;
@@ -38,16 +36,6 @@ public class Player {
 
     public Direction getDirection() {
         return this.direction;
-    }
-
-    public Player.Direction getNextPlayerDirection(Player.Direction current) {
-        switch (current) {
-            case NORTH: return Player.Direction.EAST;
-            case EAST: return Player.Direction.SOUTH;
-            case SOUTH: return Player.Direction.WEST;
-            case WEST: return Player.Direction.NORTH;
-            default: return null;
-        }
     }
 
     public void setName(String name) {

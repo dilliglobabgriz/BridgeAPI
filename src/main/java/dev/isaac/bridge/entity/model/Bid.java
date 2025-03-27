@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 import dev.isaac.bridge.entity.enums.BidLevel;
 import dev.isaac.bridge.entity.enums.BidType;
+import dev.isaac.bridge.entity.enums.Direction;
 
 @Entity
 public class Bid {
@@ -18,7 +19,7 @@ public class Bid {
     @Enumerated(EnumType.STRING)
     private BidType type;
 
-    private Player.Direction playerDirection;
+    private Direction playerDirection;
 
     protected Bid() {
     }
@@ -28,7 +29,7 @@ public class Bid {
         this.type = type;
     }
 
-    public Bid(BidLevel level, BidType type, Player.Direction playerDirection) {
+    public Bid(BidLevel level, BidType type, Direction playerDirection) {
         this.level = level;
         this.type = type;
         this.playerDirection = playerDirection;
@@ -46,7 +47,7 @@ public class Bid {
         return type;
     }
 
-    public Player.Direction getPlayerDirection() {
+    public Direction getPlayerDirection() {
         return playerDirection;
     }
 

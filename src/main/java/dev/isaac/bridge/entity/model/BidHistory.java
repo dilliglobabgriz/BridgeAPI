@@ -2,6 +2,8 @@ package dev.isaac.bridge.entity.model;
 
 import java.util.ArrayList;
 
+import dev.isaac.bridge.entity.enums.Direction;
+
 public class BidHistory {
 
     private ArrayList<Bid> bids = new ArrayList<>();
@@ -20,7 +22,7 @@ public class BidHistory {
     public ArrayList<ArrayList<Bid>> getBidsByDirection() {
         ArrayList<ArrayList<Bid>> bidsByPlayer = new ArrayList<>();
 
-        for (Player.Direction direction : Player.Direction.values()) {
+        for (Direction direction : Direction.values()) {
 
             ArrayList<Bid> playerBids = new ArrayList<>();
 

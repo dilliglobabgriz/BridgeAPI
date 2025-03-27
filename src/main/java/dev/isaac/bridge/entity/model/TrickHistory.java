@@ -3,6 +3,7 @@ package dev.isaac.bridge.entity.model;
 import java.util.ArrayList;
 
 import dev.isaac.bridge.entity.enums.BidType;
+import dev.isaac.bridge.entity.enums.Direction;
 import dev.isaac.bridge.exception.InvalidTrumpSuitException;
 
 public class TrickHistory {
@@ -12,11 +13,11 @@ public class TrickHistory {
     private int northSouthTricks;
     private int eastWestTricks;
 
-    private Player.Direction lastTrickWinner;
+    private Direction lastTrickWinner;
 
     private BidType trump;
 
-    public TrickHistory(Player.Direction dealer) {
+    public TrickHistory(Direction dealer) {
         tricks = new ArrayList<>();
 
         northSouthTricks = 0;
@@ -46,19 +47,19 @@ public class TrickHistory {
             }
     }
 
-    public void addTrick(Trick trick, Player.Direction winningDirection) {
-        if (winningDirection == Player.Direction.NORTH || winningDirection == Player.Direction.SOUTH) {
+    public void addTrick(Trick trick, Direction winningDirection) {
+        if (winningDirection == Direction.NORTH || winningDirection == Direction.SOUTH) {
             northSouthTricks++;
         } else {
             eastWestTricks++;
         }
     }
 
-    public void setLastTrickWinner(Player.Direction lastTrickWinner) {
+    public void setLastTrickWinner(Direction lastTrickWinner) {
         this.lastTrickWinner = lastTrickWinner;
     }
 
-    public Player.Direction getLastTrickWinner() {
+    public Direction getLastTrickWinner() {
         return lastTrickWinner;
     }
 

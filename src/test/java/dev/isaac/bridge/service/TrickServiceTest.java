@@ -7,10 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import dev.isaac.bridge.BridgeApplication;
+import dev.isaac.bridge.entity.enums.BidType;
+import dev.isaac.bridge.entity.enums.Direction;
 import dev.isaac.bridge.entity.enums.Rank;
 import dev.isaac.bridge.entity.enums.Suit;
 import dev.isaac.bridge.entity.model.Card;
-import dev.isaac.bridge.entity.model.Player;
 import dev.isaac.bridge.entity.model.Trick;
 
 @SpringBootTest(classes = BridgeApplication.class)
@@ -34,7 +35,7 @@ public class TrickServiceTest {
         trick.addCard(new Card(Rank.THREE, Suit.HEARTS));
 
         Card expected = new Card(Rank.THREE, Suit.HEARTS);
-        Card actual = trickService.getWinningCard(trick, Suit.HEARTS);
+        Card actual = trickService.getWinningCard(trick, BidType.HEARTS);
 
         Assertions.assertEquals(expected, actual, "Three of hearts should win this trick");
     }
@@ -60,7 +61,7 @@ public class TrickServiceTest {
         trick.addCard(new Card(Rank.SIX, Suit.CLUBS));
 
         Card expected = new Card(Rank.SEVEN, Suit.CLUBS);
-        Card actual = trickService.getWinningCard(trick, Suit.CLUBS);
+        Card actual = trickService.getWinningCard(trick, BidType.CLUBS);
 
         Assertions.assertEquals(expected, actual, "Seven of clubs should win this trick");
     }
@@ -72,8 +73,8 @@ public class TrickServiceTest {
         trick.addCard(new Card(Rank.ACE, Suit.SPADES));
         trick.addCard(new Card(Rank.THREE, Suit.HEARTS));
 
-        Player.Direction expected = Player.Direction.WEST;
-        Player.Direction actual = trickService.getWinningDirection(trick, new Card(Rank.THREE, Suit.HEARTS), Player.Direction.NORTH);
+        Direction expected = Direction.WEST;
+        Direction actual = trickService.getWinningDirection(trick, new Card(Rank.THREE, Suit.HEARTS), Direction.NORTH);
 
         Assertions.assertEquals(expected, actual, "West should win with 3 of hearts.");
     }
